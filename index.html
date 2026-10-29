@@ -365,43 +365,19 @@
     </div>
   </section>
 
-  <!-- Q5 (본사용: 금연 캠페인 및 상담프로그램 참여 / 참여하지 않음 2개로 구성) -->
+  <!-- Q5 (기존 6번) -->
   <section class="question">
-    <p class="q-title"><span class="q-num">5</span><span class="q-body">올해 진행된 건강프로그램 중 참여하신 항목을 선택해주세요.</span></p>
-    <div class="checkbox-group" data-group="q5">
-      <label class="check-card"><input type="checkbox" id="q5_program" name="q5_program"><span>금연 캠페인 및 상담프로그램 참여</span><span class="check-mark"></span></label>
-    </div>
-    <div class="sub-block" id="q5_program_sat_box" hidden>
-      <p class="sub-title">↳ [금연 캠페인 및 상담프로그램] 전반적인 만족도를 평가해주세요.</p>
-      <div class="scale-wrap">
-        <div class="scale" data-group="q5_program_sat">
-          <div class="scale-item"><label><input type="radio" name="q5_program_sat" value="1"><span>1</span></label><span class="scale-tag">불만족</span></div>
-          <div class="scale-item"><label><input type="radio" name="q5_program_sat" value="2"><span>2</span></label></div>
-          <div class="scale-item"><label><input type="radio" name="q5_program_sat" value="3"><span>3</span></label><span class="scale-tag">보통</span></div>
-          <div class="scale-item"><label><input type="radio" name="q5_program_sat" value="4"><span>4</span></label></div>
-          <div class="scale-item"><label><input type="radio" name="q5_program_sat" value="5"><span>5</span></label><span class="scale-tag">만족</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="checkbox-group" style="margin-top:0.7rem;">
-      <label class="check-card"><input type="checkbox" id="q5_none" name="q5_none"><span>참여하지 않음</span><span class="check-mark"></span></label>
-    </div>
-  </section>
-
-  <!-- Q6 -->
-  <section class="question">
-    <p class="q-title"><span class="q-num">6</span><span class="q-body">추후 참여하고 싶은 건강관리 프로그램은 무엇입니까?</span></p>
+    <p class="q-title"><span class="q-num">5</span><span class="q-body">추후 참여하고 싶은 건강관리 프로그램은 무엇입니까?</span></p>
     <p class="q-hint">중복 선택 가능</p>
-    <div class="checkbox-group" data-group="q6">
-      <label class="check-card"><input type="checkbox" name="q6" value="걷기 프로그램"><span>걷기 프로그램</span><span class="check-mark"></span></label>
-      <label class="check-card"><input type="checkbox" name="q6" value="다이어트 및 영양 프로그램"><span>다이어트 및 영양 프로그램</span><span class="check-mark"></span></label>
-      <label class="check-card"><input type="checkbox" name="q6" value="운동 프로그램"><span>운동 프로그램</span><span class="check-mark"></span></label>
-      <label class="check-card"><input type="checkbox" name="q6" value="금주,금연 등 생활습관 프로그램"><span>금주,금연 등 생활습관 프로그램</span><span class="check-mark"></span></label>
-      <label class="check-card"><input type="checkbox" name="q6" value="스트레스 관리 프로그램"><span>스트레스 관리 프로그램</span><span class="check-mark"></span></label>
-      <label class="check-card"><input type="checkbox" id="q6_other_check" name="q6_other_check"><span>기타 (직접 입력)</span><span class="check-mark"></span></label>
+    <div class="checkbox-group" data-group="q5">
+      <label class="check-card"><input type="checkbox" name="q5" value="걷기 프로그램"><span>걷기 프로그램</span><span class="check-mark"></span></label>
+      <label class="check-card"><input type="checkbox" name="q5" value="다이어트 및 영양 프로그램"><span>다이어트 및 영양 프로그램</span><span class="check-mark"></span></label>
+      <label class="check-card"><input type="checkbox" name="q5" value="운동 프로그램"><span>운동 프로그램</span><span class="check-mark"></span></label>
+      <label class="check-card"><input type="checkbox" name="q5" value="금주,금연 등 생활습관 프로그램"><span>금주,금연 등 생활습관 프로그램</span><span class="check-mark"></span></label>
+      <label class="check-card"><input type="checkbox" name="q5" value="스트레스 관리 프로그램"><span>스트레스 관리 프로그램</span><span class="check-mark"></span></label>
+      <label class="check-card"><input type="checkbox" id="q5_other_check" name="q5_other_check"><span>기타 (직접 입력)</span><span class="check-mark"></span></label>
     </div>
-    <input type="text" id="q6_other_text" class="other-input" style="display:none;" placeholder="원하시는 프로그램을 적어주세요">
+    <input type="text" id="q5_other_text" class="other-input" style="display:none;" placeholder="원하시는 프로그램을 적어주세요">
   </section>
 
 </form>
@@ -462,48 +438,24 @@
     });
   });
 
-  // Q5: 금연 캠페인 및 상담프로그램 체크 시 만족도 하위질문 노출, "참여하지 않음"과 상호배타
-  const q5Program = document.getElementById('q5_program');
-  const q5None = document.getElementById('q5_none');
-  const q5ProgramSatBox = document.getElementById('q5_program_sat_box');
-
-  function syncQ5(changedNone){
-    if(changedNone && q5None.checked){
-      q5Program.checked = false;
-    } else if(!changedNone && q5Program.checked){
-      q5None.checked = false;
-    }
-    q5ProgramSatBox.hidden = !q5Program.checked;
-    if(!q5Program.checked){
-      form.querySelectorAll('input[name="q5_program_sat"]').forEach(r => r.checked = false);
-    }
-    refreshSelectedStyles(q5ProgramSatBox);
-    refreshSelectedStyles(q5Program.closest('.checkbox-group'));
-    refreshSelectedStyles(q5None.closest('.checkbox-group'));
-    updateProgress();
-  }
-  q5Program.addEventListener('change', () => syncQ5(false));
-  q5None.addEventListener('change', () => syncQ5(true));
-
-  // Q6 기타 직접입력
-  const q6OtherCheck = document.getElementById('q6_other_check');
-  const q6OtherText = document.getElementById('q6_other_text');
-  q6OtherCheck.addEventListener('change', () => {
-    q6OtherText.style.display = q6OtherCheck.checked ? 'block' : 'none';
-    if(!q6OtherCheck.checked) q6OtherText.value = '';
+  // Q5 기타 직접입력
+  const q5OtherCheck = document.getElementById('q5_other_check');
+  const q5OtherText = document.getElementById('q5_other_text');
+  q5OtherCheck.addEventListener('change', () => {
+    q5OtherText.style.display = q5OtherCheck.checked ? 'block' : 'none';
+    if(!q5OtherCheck.checked) q5OtherText.value = '';
     updateProgress();
   });
 
-  // 진행률 바 (전체 6문항 중 응답한 문항 수 기준)
+  // 진행률 바 (전체 5문항 중 응답한 문항 수 기준)
   function updateProgress(){
-    const total = 6;
+    const total = 5;
     let answered = 0;
     if(form.querySelector('input[name="q1"]:checked')) answered++;
     if(form.querySelector('input[name="q2"]:checked')) answered++;
     if(form.querySelector('input[name="q3"]:checked')) answered++;
     if(form.querySelectorAll('input[name="q4"]:checked').length > 0) answered++;
-    if(q5Program.checked || q5None.checked) answered++;
-    if(form.querySelectorAll('input[name="q6"]:checked').length > 0 || q6OtherCheck.checked) answered++;
+    if(form.querySelectorAll('input[name="q5"]:checked').length > 0 || q5OtherCheck.checked) answered++;
     const pct = Math.round((answered / total) * 100);
     progressFill.style.width = pct + '%';
   }
@@ -531,8 +483,8 @@
 
     const q2_sub = Array.from(form.querySelectorAll('input[name="q2_sub"]:checked')).map(el => el.value);
     const q4 = Array.from(form.querySelectorAll('input[name="q4"]:checked')).map(el => el.value);
-    const q6 = Array.from(form.querySelectorAll('input[name="q6"]:checked')).map(el => el.value);
-    const q6_other = (q6OtherCheck.checked && q6OtherText.value.trim()) ? q6OtherText.value.trim() : '';
+    const q5 = Array.from(form.querySelectorAll('input[name="q5"]:checked')).map(el => el.value);
+    const q5_other = (q5OtherCheck.checked && q5OtherText.value.trim()) ? q5OtherText.value.trim() : '';
 
     if(SCRIPT_URL.indexOf('YOUR_HQ_APPS_SCRIPT_WEB_APP_URL') !== -1){
       alert('아직 SCRIPT_URL이 설정되지 않았습니다. index.html 상단의 SCRIPT_URL을 본사용 Apps Script 웹앱 주소로 교체해주세요.');
@@ -546,11 +498,8 @@
       q2_sub: q2_sub,
       q3: q3,
       q4: q4,
-      q5_program: q5Program.checked,
-      q5_program_sat: form.querySelector('input[name="q5_program_sat"]:checked')?.value || '',
-      q5_none: q5None.checked,
-      q6: q6,
-      q6_other: q6_other
+      q5: q5,
+      q5_other: q5_other
     };
 
     submitBar.style.display = 'none';

@@ -23,11 +23,8 @@ const HEADERS = [
   'Q2_개선된항목',
   'Q3_회사지원인식(1-5)',
   'Q4_만족활동',
-  'Q5_금연캠페인상담프로그램_참여',
-  'Q5_금연캠페인상담프로그램_만족도(1-5)',
-  'Q5_참여안함',
-  'Q6_희망프로그램',
-  'Q6_기타의견'
+  'Q5_희망프로그램',
+  'Q5_기타의견'
 ];
 
 function doPost(e) {
@@ -57,11 +54,8 @@ function doPost(e) {
       (data.q2_sub || []).join(', '),
       data.q3 || '',
       (data.q4 || []).join(', '),
-      data.q5_program ? 'Y' : 'N',
-      data.q5_program_sat || '',
-      data.q5_none ? 'Y' : 'N',
-      (data.q6 || []).join(', '),
-      data.q6_other || ''
+      (data.q5 || []).join(', '),
+      data.q5_other || ''
     ]);
 
     return ContentService
